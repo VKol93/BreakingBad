@@ -12,5 +12,6 @@ data class Character (
     var nickname: String,
     @SerializedName(value = "appearance") var season: List<String>,
     var portrayed: String,
-    var category: String
+    var category: String,
+    var occupation:List<String>
 )
