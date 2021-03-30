@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">BreakingBad</string>
+
+    <string-array name="seasons">
+        <item>All seasons</item>
+        <item>Season1</item>
+        <item>Season2</item>
+        <item>Season3</item>
+        <item>Season4</item>
+        <item>Season5</item>
+    </string-array>
 </resources>
