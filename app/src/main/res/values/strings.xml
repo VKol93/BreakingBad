@@ -9,4 +9,9 @@
         <item>Season4</item>
         <item>Season5</item>
     </string-array>
+
+    <string name="occupation">Occupation: </string>
+    <string name="status">Status: </string>
+    <string name="nickname">Nickname: </string>
+    <string name="season">Appears in season: </string>
 </resources>

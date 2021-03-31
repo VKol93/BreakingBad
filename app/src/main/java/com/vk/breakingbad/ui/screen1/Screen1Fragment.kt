@@ -37,7 +37,6 @@ class Screen1Fragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding = Screen1Binding.bind(view)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
-
         setListeners()
         refreshCharacters()
     }
@@ -85,7 +84,6 @@ class Screen1Fragment : Fragment() {
         else
             characters?.filter { it.season.contains(season) }
         val filteredCharacters = filteredBySeasonCharacters?.filter { it.name.startsWith(input ?: "", true) }
-
         val adapter = CharacterAdapter(filteredCharacters?: emptyList(), object: CharacterAdapter.OnClickListener{
             override fun onRegisterItemClick(id: Int) {
                 onItemClick(id)

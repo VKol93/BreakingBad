@@ -40,10 +40,10 @@ class Screen2Fragment : Fragment() {
             Picasso.with(requireContext())
                     .load(character.image)
                     .into(binding.characterImage)
-            binding.occupationTextView.text = character.occupation.joinToString(",")
-            binding.nicknameTextView.text = character.nickname
-            binding.seasonAppearanceTextView.text = character.season.joinToString(",")
-            binding.statusTextView.text = character.status
+            binding.occupationTextView.text = getString(R.string.occupation) + character.occupation.joinToString(", ")
+            binding.nicknameTextView.text = getString(R.string.nickname) + character.nickname
+            binding.seasonAppearanceTextView.text = getString(R.string.season) + character.season.joinToString(", ")
+            binding.statusTextView.text = getString(R.string.status) + character.status
         }
 
         /*binding = Screen1Binding.bind(view)
