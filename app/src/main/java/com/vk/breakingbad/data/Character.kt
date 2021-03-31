@@ -1,4 +1,4 @@
-package com.vk.breakingbad.datasource
+package com.vk.breakingbad.data
 
 import com.google.gson.annotations.SerializedName
 

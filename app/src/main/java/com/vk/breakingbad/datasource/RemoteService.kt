@@ -1,6 +1,6 @@
 package com.vk.breakingbad
 
-import com.vk.breakingbad.datasource.Character
+import com.vk.breakingbad.data.Character
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET

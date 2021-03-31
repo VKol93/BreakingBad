@@ -1,6 +1,6 @@
 package com.vk.breakingbad.utils
 
-import com.vk.breakingbad.datasource.Character
+import com.vk.breakingbad.data.Character
 import org.junit.Test
 
 import org.junit.Assert.*

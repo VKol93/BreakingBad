@@ -1,15 +1,13 @@
 package com.vk.breakingbad.ui.screen1
 
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import com.vk.breakingbad.R
 import com.vk.breakingbad.databinding.CharacterItemBinding
-import com.vk.breakingbad.datasource.Character
+import com.vk.breakingbad.data.Character
 
 class CharacterAdapter (val characters: List<Character>, val listener: OnClickListener): RecyclerView.Adapter<CharacterViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {

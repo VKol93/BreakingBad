@@ -6,23 +6,16 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import com.vk.breakingbad.BreakingBadAPI
 import com.vk.breakingbad.R
 import com.vk.breakingbad.databinding.Screen1Binding
-import com.vk.breakingbad.datasource.Character
-import com.vk.breakingbad.utils.CharactersFilters
-import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 
 class Screen1Fragment : Fragment() {
     private lateinit var binding: Screen1Binding
-
-    var characters: List<Character>? = null
-    var season: String = ""
-    var input: String? = ""
+    val viewModel: Screen1ViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,13 +26,13 @@ class Screen1Fragment : Fragment() {
             R.layout.screen1, container, false
         )
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = Screen1Binding.bind(view)
         binding.recyclerView.layoutManager = GridLayoutManager(context, 2)
         setListeners()
-        refreshCharacters()
+        setListenerCharacters()
+        viewModel.refreshCharacters()
     }
 
     private fun setListeners() {
@@ -48,15 +41,15 @@ class Screen1Fragment : Fragment() {
                 return true
             }
             override fun onQueryTextChange(newText: String?): Boolean {
-                input = newText
-                filterAndShowCharacters()
+                viewModel.input.value = newText
+                //showCharacters()
                 return true
             }
         })
 
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                season = when (position) {
+                viewModel.season.value = when (position) {
                     0 -> ""
                     1 -> "1"
                     2 -> "2"
@@ -65,28 +58,22 @@ class Screen1Fragment : Fragment() {
                     5 -> "5"
                     else -> throw IllegalStateException("Unknown Season")
                 }
-                filterAndShowCharacters()
+                //showCharacters()
             }
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
         }
     }
-
-    private fun refreshCharacters() {
-        lifecycleScope.launch {
-            characters = BreakingBadAPI.RETROFIT_SERVICE.getCharacter()
-            filterAndShowCharacters()
+    private fun setListenerCharacters() {
+        viewModel.filteredCharactersLiveData.observe(viewLifecycleOwner) {
+            val adapter = CharacterAdapter(it
+                    ?: emptyList(), object : CharacterAdapter.OnClickListener {
+                override fun onRegisterItemClick(id: Int) {
+                    onItemClick(id)
+                }
+            })
+            binding.recyclerView.adapter = adapter
         }
-    }
-
-    private fun filterAndShowCharacters() {
-        val filteredCharacters = CharactersFilters.filterByAllFilters(characters, season, input)
-        val adapter = CharacterAdapter(filteredCharacters?: emptyList(), object: CharacterAdapter.OnClickListener{
-            override fun onRegisterItemClick(id: Int) {
-                onItemClick(id)
-            }
-        })
-        binding.recyclerView.adapter = adapter
     }
 
 
