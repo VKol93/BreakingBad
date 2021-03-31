@@ -13,6 +13,7 @@ import com.vk.breakingbad.BreakingBadAPI
 import com.vk.breakingbad.R
 import com.vk.breakingbad.databinding.Screen1Binding
 import com.vk.breakingbad.datasource.Character
+import com.vk.breakingbad.utils.CharactersFilters
 import kotlinx.coroutines.launch
 import java.lang.IllegalStateException
 
@@ -79,11 +80,7 @@ class Screen1Fragment : Fragment() {
     }
 
     private fun filterAndShowCharacters() {
-        val filteredBySeasonCharacters = if (season == "")
-            characters
-        else
-            characters?.filter { it.season.contains(season) }
-        val filteredCharacters = filteredBySeasonCharacters?.filter { it.name.startsWith(input ?: "", true) }
+        val filteredCharacters = CharactersFilters.filterByAllFilters(characters, season, input)
         val adapter = CharacterAdapter(filteredCharacters?: emptyList(), object: CharacterAdapter.OnClickListener{
             override fun onRegisterItemClick(id: Int) {
                 onItemClick(id)
@@ -92,8 +89,11 @@ class Screen1Fragment : Fragment() {
         binding.recyclerView.adapter = adapter
     }
 
+
+
     private fun onItemClick(id:Int){
         val action = Screen1FragmentDirections.actionScreen1FragmentToScreen2Fragment(id)
         findNavController().navigate(action)
     }
 }
+
