@@ -76,8 +76,6 @@ class Screen1Fragment : Fragment() {
         }
     }
 
-
-
     private fun onItemClick(id:Int){
         val action = Screen1FragmentDirections.actionScreen1FragmentToScreen2Fragment(id)
         findNavController().navigate(action)

@@ -45,24 +45,5 @@ class Screen2Fragment : Fragment() {
             binding.seasonAppearanceTextView.text = getString(R.string.season) + character.season.joinToString(", ")
             binding.statusTextView.text = getString(R.string.status) + character.status
         }
-
-        /*binding = Screen1Binding.bind(view)
-        val spinner = binding.spinner
-        val recyclerView = binding.recyclerView
-        recyclerView.layoutManager = GridLayoutManager(context, 2)
-        val search = binding.searchEditText
-
-        lifecycleScope.launch {
-            val characters = BreakingBadAPI.RETROFIT_SERVICE.getCharacter()
-            val adapter = CharacterAdapter(characters, object: CharacterAdapter.OnClickListener{
-                override fun onRegisterItemClick(id: Int) {
-                    onItemClick(id)
-                }
-
-            })
-            binding.recyclerView.adapter = adapter
-
-        }*/
     }
-
-    }
+}
